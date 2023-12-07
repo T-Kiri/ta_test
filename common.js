@@ -18,13 +18,13 @@
   q_list.each(function(i) {
     q_list.eq(i).find(".select").addClass("s-" + i);
 
-    // 型を変更する「String()」について https://hajimete.org/jquery-string-from-number
+    // 型を変更する「String()」について
     num_barNum.push(100 / (q_list.length-1) * (String(i+1)) + "%");
     if(i != q_list.length-1) {
       // 問題の数「Q,1、Q,2、Q,3、Q,4、Q,5....」を追加
       q_list.eq(i).prepend('<p>Q,' + String(i+1) + '</p>');
 
-      // 各問題に[Yes]、[No]ボタンを追加ボタンのテキストを変更する場合はコチラを修正してください
+      // 各問題に[Yes]、[No]ボタンを追加
       // 各問題のボタンのテキストを変更
       if(i == 0) {
          q_list.eq(0).append('<div class="select"><p>子連れファミリー</p><p>大人</p></div>');
@@ -50,22 +50,18 @@
 
 
   // 診断テストページで、「Yes」または「No」を押した時
-  // 回答ボタンを３つ以上設置する場合は、CSSとココの処理を変更します
+  // 回答ボタンを３つ以上設置する場合は、CSSとココの処理を変更
   let num = 0;
   // 回答を入れる配列を初期化
   let result = [];
   $(".select p").on("click", function() {
     let btn = $(this);
     // Yesなら"1"、Noなら"2"を格納
-    // 回答ボタンを３つ以上設置する場合は３つ目が"3"、４つ目が"4"、５つ目が"5"...と入ります
     let selectNum = $(".questions li:eq("+num+") .select p").index(this) + 1;
     // 押された値を配列に格納
     // 回答ボタンを３つ以上設置する場合は「else if(selectNum ==...」に適切な値を追加してください
     if(selectNum == 1) { result.push("Y"); }
     else if(selectNum == 2) { result.push("N"); }
-    // else if(selectNum == 3) { result.push("Other3"); }
-    // else if(selectNum == 4) { result.push("Other4"); }
-    // else if(selectNum == 5) { result.push("Other5"); }
     // 次の質問へ進むアニメーション
     $(".progress-bar > span").css({width: num_barNum[num+1]});
     btn.addClass("click");
